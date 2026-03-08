@@ -2,56 +2,36 @@
 #include <stdlib.h>
 #include "nodo.h"
 
-/* TODO
-   Definir la estructura Nodo.
-   Debe contener un entero llamado valor.
-*/
-struct Nodo
-{
-    /* TODO */
+struct Nodo {
+
+    int valor;
+  
 };
 
+Nodo* crearNodo(int valor) {
+    Nodo* nuevoNodo = (Nodo*)malloc(sizeof(Nodo)); // Asignar memoria para un nuevo nodo
+    if (nuevoNodo != NULL) {// Verificar que la asignación de memoria fue exitosa
+        nuevoNodo->valor = valor;// Inicializar el valor del nodo
+    }
 
-/* Crear un nodo dinámicamente */
-Nodo* crearNodo(int valor)
-{
-    /* TODO
-       1 Reservar memoria con malloc
-       2 Verificar que la memoria se haya asignado
-       3 Inicializar el valor del nodo
-       4 Regresar el nodo
-    */
-
-    return NULL;
+    return nuevoNodo;// Devolver el puntero al nuevo nodo
 }
 
-
-/* Obtener el valor almacenado */
-int obtenerValor(Nodo* nodo)
-{
-    /* TODO
-       1 Verificar que el nodo no sea NULL
-       2 Regresar el valor almacenado
-    */
-
-    return 0;
+int obtenerValor(Nodo* nodo) {
+    if (nodo == NULL) {
+        return -1; // Manejo de error: nodo nulo
+    }
+    return nodo->valor; // Devolver el valor almacenado en el nodo
 }
 
-
-/* Modificar el valor almacenado */
-void asignarValor(Nodo* nodo, int valor)
-{
-    /* TODO
-       1 Verificar que el nodo no sea NULL
-       2 Asignar el nuevo valor
-    */
+void asignarValor(Nodo* nodo, int valor) {
+    if (nodo != NULL) { // Verificar que el nodo no sea nulo
+        nodo->valor = valor; // Asignar el nuevo valor al nodo
+    }
 }
 
-
-/* Liberar memoria del nodo */
-void destruirNodo(Nodo* nodo)
-{
-    /* TODO
-       Liberar la memoria usando free
-    */
+void destruirNodo(Nodo* nodo) {
+    if (nodo != NULL) {// Verificar que el nodo no sea nulo antes de intentar liberarloc
+        free(nodo); // Liberar la memoria ocupada por el nodo
+    }
 }
