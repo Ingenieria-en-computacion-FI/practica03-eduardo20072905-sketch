@@ -1,20 +1,23 @@
 #ifndef __NODO_H__
 #define __NODO_H__
 
-/* Declaración incompleta del tipo Nodo (tipo opaco) */
+#include <stdio.h>
+
+struct Nodo {
+
+    int valor;
+  
+};
+
 typedef struct Nodo Nodo;
 
+Nodo* crearNodo(int valor); //Crear un nuevo nodo con el valor dado
 
-/* Crea un nodo con el valor indicado */
-Nodo* crearNodo(int valor);
+int obtenerValor(Nodo* nodo); //Obtener el valor almacenado en el nodo
 
-/* Obtiene el valor almacenado en el nodo */
-int obtenerValor(Nodo* nodo);
+void asignarValor(Nodo* nodo, int valor); //Asignar un nuevo valor al nodo
 
-/* Cambia el valor almacenado en el nodo */
-void asignarValor(Nodo* nodo, int valor);
+void destruirNodo(Nodo* nodo); //Liberar la memoria ocupada por el nodo
 
-/* Libera la memoria del nodo */
-void destruirNodo(Nodo* nodo);
 
 #endif
