@@ -2,88 +2,47 @@
 #include <stdlib.h>
 #include "fraccion.h"
 
-/* TODO
-   Definir la estructura Fraccion
-   Debe contener:
-   - numerador
-   - denominador
-*/
-struct Fraccion
-{
-    /* TODO */
-};
-
-
-/* TODO
-   Crear una función auxiliar para calcular
-   el máximo común divisor (MCD)
-*/
-int mcd(int a, int b)
-{
-    /* TODO */
-
-    return 1;
+int mcd(int a, int b){
+    if(b==0)
+        return a;
+    return mcd(b, a%b);
 }
 
+void simplificarFraccion(Fraccion *f){
+    int d = mcd(f->num, f->den);
 
-/* Crear fracción */
-Fraccion* crearFraccion(int num, int den)
-{
-    /* TODO
-       1 Verificar que el denominador no sea 0
-       2 Reservar memoria con malloc
-       3 Asignar numerador y denominador
-       4 Simplificar la fracción
-       5 Regresar la fracción
-    */
+    f->num = f->num / d;
+    f->den = f->den / d;
 
-    return NULL;
+    if(f->den < 0){      // mantener signo en numerador
+        f->den = -f->den;
+        f->num = -f->num;
+    }
 }
 
+Fraccion* crearFraccion(int num, int den){
+    if(den == 0){
+        printf("Error: denominador no puede ser 0\n");
+        return NULL;
+    }
 
-/* Simplificar fracción */
-void simplificar(Fraccion* f)
-{
-    /* TODO
-       1 Calcular el MCD
-       2 Dividir numerador y denominador entre el MCD
-    */
+    Fraccion *f = (Fraccion*) malloc(sizeof(Fraccion));
+    f->num = num;
+    f->den = den;
+    simplificarFraccion(f);
+    return f;
 }
 
-
-/* Sumar fracciones */
-Fraccion* sumar(Fraccion* a, Fraccion* b)
-{
-    /* TODO
-       1 Calcular numerador resultante
-
-          a/b + c/d =
-          (a*d + b*c) / (b*d)
-
-       2 Crear nueva fracción
-       3 Simplificar
-       4 Regresar resultado
-    */
-
-    return NULL;
+Fraccion* sumarFraccion(Fraccion *f1, Fraccion *f2){
+    int num = f1->num * f2->den + f2->num * f1->den;
+    int den = f1->den * f2->den;
+    return crearFraccion(num, den);
 }
 
-
-/* Imprimir fracción */
-void imprimir(Fraccion* f)
-{
-    /* TODO
-       Imprimir en formato:
-
-       numerador/denominador
-    */
+void imprimirFraccion(Fraccion *f){
+    printf("%d/%d\n", f->num, f->den);
 }
 
-
-/* Liberar memoria */
-void destruir(Fraccion* f)
-{
-    /* TODO
-       Liberar memoria con free
-    */
+void destruirFraccion(Fraccion *f){
+    free(f);
 }
